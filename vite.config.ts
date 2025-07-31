@@ -35,7 +35,6 @@ export default defineConfig({
         ElementPlusResolver(),
         // 自动注册图标组件
         IconsResolver({
-          alias: { icon: 'ep' }, // 设置别名 (可选)
           enabledCollections: ['ep'], // 启用Element Plus图标集
         }),
       ],
