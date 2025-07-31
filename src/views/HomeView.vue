@@ -16,8 +16,7 @@ const handleSearch = () => {
             <h1 class="title">just so so</h1>
             <p class="subtitle">有什么可以帮你的吗</p>
             <div class="search-container">
-                <el-input v-model="searchQuery" placeholder="搜一搜" class="search-input" @keyup.enter="handleSearch"
-                    prefix-icon="search">
+                <el-input v-model="searchQuery" placeholder="搜一搜" class="search-input" @keyup.enter="handleSearch">
                     <template #append>
                         <el-button type="primary" @click="handleSearch" class="search-button">
                             soso
