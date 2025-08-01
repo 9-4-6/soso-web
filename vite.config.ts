@@ -1,5 +1,4 @@
-import { fileURLToPath, URL } from 'node:url'
-
+import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
@@ -8,6 +7,9 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+
+const pathSrc = path.resolve(__dirname, 'src')
+
 // https://vite.dev/config/
 export default defineConfig({
   css: {
@@ -17,40 +19,51 @@ export default defineConfig({
       },
     },
   },
+  resolve: {
+    alias: {
+      '@': pathSrc,
+    },
+  },
   plugins: [
     vue(),
     vueDevTools(),
     AutoImport({
+      // Auto import functions from Vue, e.g. ref, reactive, toRef...
+      // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
+      imports: ['vue'],
+
+      // Auto import functions from Element Plus, e.g. ElMessage, ElMessageBox... (with style)
+      // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
       resolvers: [
         ElementPlusResolver(),
-        // 自动导入图标
+
+        // Auto import icon components
+        // 自动导入图标组件
         IconsResolver({
-          prefix: 'Icon', // 图标组件前缀 (可选)
-          enabledCollections: ['ep'], // Element Plus 图标集
+          prefix: 'Icon',
         }),
       ],
+
+      dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
     }),
+
     Components({
       resolvers: [
-        ElementPlusResolver(),
+        // Auto register icon components
         // 自动注册图标组件
         IconsResolver({
-          enabledCollections: ['ep'], // 启用Element Plus图标集
+          enabledCollections: ['ep'],
         }),
+        // Auto register Element Plus components
+        // 自动导入 Element Plus 组件
+        ElementPlusResolver(),
       ],
+
+      dts: path.resolve(pathSrc, 'components.d.ts'),
     }),
-    // 图标插件
+
     Icons({
-      compiler: 'vue3',
-      autoInstall: true, // 自动安装图标集
-      scale: 1, // 图标缩放 (可选)
-      defaultClass: 'icon', // 默认类名 (可选)
+      autoInstall: true,
     }),
   ],
-
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-  },
 })
