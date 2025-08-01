@@ -17,6 +17,11 @@ const router = createRouter({
       name: 'SeachResult',
       component: () => import('@/views/SeachResultView.vue'),
     },
+    {
+      path: '/sysManager',
+      name: 'SysManager',
+      component: () => import('@/views/SysManagerView.vue'),
+    },
   ],
 })
 
