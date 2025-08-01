@@ -102,7 +102,7 @@ const handleSearch = () => {
             padding: 0 20px;
             background-color: @primary-color;
             border-color: @primary-color;
-            color: black;
+            color: white;
 
             &:hover {
                 background-color: darken(@primary-color, 10%);
