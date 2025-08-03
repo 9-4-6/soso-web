@@ -17,6 +17,11 @@ export default defineConfig({
       less: {
         additionalData: `@import "@/styles/variables.less";`, // 全局注入
       },
+      scss: {
+        additionalData: `
+          @use "@/styles/element/index.scss" as *;
+        `,
+      },
     },
   },
   resolve: {

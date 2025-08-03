@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
 
 const form = reactive({
     username: '',
@@ -17,7 +16,7 @@ const handleLogin = () => {
             <div class="soso-text">SOSO</div>
         </div>
         <el-form label-width="120px" class="login-form" :model="form" status-icon>
-            <h2 class="login-title">系统登录</h2>
+            <h2 class="login-title">soso登录</h2>
             <el-form-item label="账号">
                 <el-input v-model="form.username" placeholder="请输入账号" />
             </el-form-item>

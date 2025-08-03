@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import type { RecordItem } from '@/types/record';
+interface RecordItem {
+    id: number
+    name: string
+}
 const items: RecordItem[] = [
     { id: 1, name: "苹果" },
     { id: 2, name: "香蕉" },
