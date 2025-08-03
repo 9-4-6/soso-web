@@ -2,9 +2,8 @@ import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { getToken, setToken } from '@/utils/local'
 import router from '@/router'
-import { ElMessage } from 'element-plus'
 
-const baseURL = 'http://localhost:8081/api'
+const baseURL = 'http://localhost:8081'
 // 导出Request类
 export class Request {
   // axios 实例
@@ -36,8 +35,18 @@ export class Request {
     // 响应拦截
     this.instance.interceptors.response.use(
       (res: AxiosResponse) => {
+        if (res.data.code === 401) {
+          setToken('')
+          router.push('/login')
+          return
+        }
+        if (res.data.code !== 200) {
+          const errMsg = res.data?.msg || '服务内部异常'
+          ElMessage.error(errMsg)
+        }
         return res.data
       },
+      //http请求异常
       (err: any) => {
         let message = ''
         // 检查是否有响应
@@ -49,22 +58,8 @@ export class Request {
 
         // 根据状态码设置错误消息
         switch (err.response.status) {
-          case 400:
-            message = err.response.data?.message || '请求错误(400)'
-            break
-          case 401:
-            message = '未授权，请重新登录(401)'
-            setToken('')
-            router.push({ path: '/login' })
-            break
-          case 403:
-            message = err.response.data?.message || '拒绝访问(403)'
-            break
           case 404:
             message = err.response.data?.message || '请求资源不存在(404)'
-            break
-          case 500:
-            message = err.response.data?.message || '服务器内部错误(500)'
             break
           case 502:
             message = '网关错误(502)'
@@ -81,9 +76,6 @@ export class Request {
 
         // 显示错误消息
         ElMessage.error(message)
-
-        // 返回拒绝的Promise
-        return Promise.reject(err.response)
       },
     )
   }

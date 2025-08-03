@@ -71,4 +71,13 @@ export default defineConfig({
       autoInstall: true,
     }),
   ],
+  server: {
+    port: 3008,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8081',
+        changeOrigin: true,
+      },
+    },
+  },
 })

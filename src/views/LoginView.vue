@@ -1,13 +1,39 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+import md5 from 'md5'
+import { loginApi } from '@/apis/auth'
+import { setToken } from '@/utils/local'
 
-const form = reactive({
-    username: '',
-    password: ''
+
+interface Form {
+    username?: string,
+    password?: string,
+    platformId: number
+    loginType: number
+}
+const form = reactive<Form>({
+    username: undefined,
+    password: undefined,
+    platformId: 3,
+    loginType: 0
 })
+const router = useRouter()
 
-const handleLogin = () => {
+const handleLogin = async () => {
     console.log('登录信息:', form)
     // 这里添加登录逻辑
+    //对密码进行MD5加密
+    const password = String(form.password);
+    const encryptedPassword = md5(password);
+    const res = await loginApi({
+        ...form,
+        password: encryptedPassword
+    })
+    if (res.code == 200) {
+        setToken(res.data.accessToken)
+        router.push('/home')
+
+    }
 }
 </script>
 <template>
