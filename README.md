@@ -30,4 +30,4 @@ http://localhost:3008/
 ## 系统展示  
 <img width="1854" height="786" alt="image" src="https://github.com/user-attachments/assets/8f5afdd5-d712-45db-b431-a9cdeb863be5" />
 
-<img width="1905" height="845" alt="image" src="https://github.com/user-attachments/assets/a317e83e-04d5-4d1f-a75c-da8c28a976e4" />
+<img width="1810" height="836" alt="image" src="https://github.com/user-attachments/assets/78cde7df-afc3-408f-8ed7-efc27df5f5a5" />
