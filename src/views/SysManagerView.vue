@@ -1,37 +1,33 @@
 <script lang="ts" setup>
-const circleUrl = ref('https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png')
+import NavBar from '@/components/NavBar.vue'
+
 const handleOpen = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
 const handleClose = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
+
+const circleUrl = ref('https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png')
+const dropdownItems = [
+    {
+        label: '首页',
+        path: '/home'
+    },
+    {
+        label: '退出登录',
+        action: () => {
+            // Add your logout logic here
+            console.log('Logging out...')
+        }
+    }
+]
 </script>
+
 <template>
     <div class="app-container">
-        <div class="nav">
-            <div class="left">
-                <div class="avatar">
-                    <el-avatar :size="40" :src="circleUrl" />
-                </div>
-                <div class="menuDown">
-                    <el-dropdown>
-                        <span class="el-dropdown-link">
-                            admin
-                            <el-icon class="el-icon--right">
-                                <i-ep-arrow-down />
-                            </el-icon>
-                        </span>
-                        <template #dropdown>
-                            <el-dropdown-menu>
-                                <el-dropdown-item>系统管理</el-dropdown-item>
-                            </el-dropdown-menu>
-                        </template>
-                    </el-dropdown>
-                </div>
-            </div>
+        <NavBar :circle-url="circleUrl" :dropdown-items="dropdownItems" />
 
-        </div>
         <div class="main-content">
             <div class="left-side">
                 <el-menu default-active="2" @open="handleOpen" @close="handleClose">
@@ -54,14 +50,13 @@ const handleClose = (key: string, keyPath: string[]) => {
                         </template>
                         <el-menu-item index="2-1">内容管理</el-menu-item>
                     </el-sub-menu>
-
                 </el-menu>
             </div>
             <div class="content"></div>
         </div>
     </div>
-
 </template>
+
 <style lang="less" scoped>
 .app-container {
     display: flex;
@@ -69,36 +64,6 @@ const handleClose = (key: string, keyPath: string[]) => {
     height: 100vh;
     gap: 12px;
     background: #efeaeb;
-
-    .nav {
-        height: 10%;
-        background: #fff;
-
-        .left {
-            height: 100%;
-            justify-content: flex-end;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-
-            .avatar {
-                display: flex;
-            }
-
-            .menuDown {
-                display: flex;
-
-                .el-dropdown-link {
-                    display: flex;
-                    /* 使文字和图标垂直对齐 */
-                    cursor: pointer;
-                    color: var(--el-color-primary);
-                    outline: none;
-                    box-shadow: none;
-                }
-            }
-        }
-    }
 
     .main-content {
         height: 85%;

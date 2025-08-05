@@ -31,6 +31,7 @@ declare module 'vue' {
     IEpIconMenu: typeof import('~icons/ep/icon-menu')['default']
     IEpLocation: typeof import('~icons/ep/location')['default']
     IEpSetting: typeof import('~icons/ep/setting')['default']
+    NavBar: typeof import('./components/NavBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
