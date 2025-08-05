@@ -21,6 +21,13 @@ const router = createRouter({
       path: '/sysManager',
       name: 'SysManager',
       component: () => import('@/views/SysManagerView.vue'),
+      children: [
+        {
+          path: '/content',
+          name: 'content',
+          component: () => import('@/views/ContentView.vue'),
+        },
+      ],
     },
   ],
 })

@@ -52,7 +52,9 @@ const dropdownItems = [
                     </el-sub-menu>
                 </el-menu>
             </div>
-            <div class="content"></div>
+            <div class="content">
+                <router-view></router-view> <!-- 这里会显示子路由组件 -->
+            </div>
         </div>
     </div>
 </template>
