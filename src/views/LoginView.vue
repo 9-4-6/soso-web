@@ -2,7 +2,8 @@
 import { useRouter } from 'vue-router'
 import md5 from 'md5'
 import { loginApi } from '@/apis/auth'
-import { setToken } from '@/utils/local'
+import { useAuthStore } from '@/stores/auth.store'
+
 
 
 interface Form {
@@ -18,6 +19,7 @@ const form = reactive<Form>({
     loginType: 0
 })
 const router = useRouter()
+const authStore = useAuthStore()
 
 const handleLogin = async () => {
     console.log('登录信息:', form)
@@ -30,7 +32,7 @@ const handleLogin = async () => {
         password: encryptedPassword
     })
     if (res.code == 200) {
-        setToken(res.data.accessToken)
+        authStore.setToken(res.data.accessToken)
         router.push('/home')
 
     }

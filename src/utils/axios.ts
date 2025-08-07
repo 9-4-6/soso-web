@@ -1,7 +1,9 @@
 import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
-import { getToken, setToken } from '@/utils/local'
+import { useAuthStore } from '@/stores/auth.store'
+
 import router from '@/router'
+const authStore = useAuthStore()
 
 const baseURL = 'http://localhost:8081'
 // 导出Request类
@@ -18,7 +20,7 @@ export class Request {
     this.instance.interceptors.request.use(
       (config) => {
         // 一般会请求拦截里面加token，用于后端的验证
-        const token = getToken()
+        const token = authStore.getToken
         if (token) {
           config.headers = config.headers || {}
           // 自定义头名 + 自定义前缀
@@ -36,7 +38,7 @@ export class Request {
     this.instance.interceptors.response.use(
       (res: AxiosResponse) => {
         if (res.data.code === 401) {
-          setToken('')
+          authStore.clearToken()
           router.push('/login')
           return
         }

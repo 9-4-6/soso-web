@@ -30,7 +30,7 @@ const dropdownItems = [
 
         <div class="main-content">
             <div class="left-side">
-                <el-menu default-active="2" @open="handleOpen" @close="handleClose">
+                <el-menu default-active="$route.path" router @open="handleOpen" @close="handleClose">
                     <el-sub-menu index="1">
                         <template #title>
                             <el-icon>
@@ -38,8 +38,8 @@ const dropdownItems = [
                             </el-icon>
                             <span>系统管理</span>
                         </template>
-                        <el-menu-item index="1-1">部门管理</el-menu-item>
-                        <el-menu-item index="1-2">岗位管理</el-menu-item>
+                        <el-menu-item index="/sysManager">部门管理</el-menu-item>
+                        <el-menu-item index="/sysManager">岗位管理</el-menu-item>
                     </el-sub-menu>
                     <el-sub-menu index="2">
                         <template #title>
@@ -48,7 +48,7 @@ const dropdownItems = [
                             </el-icon>
                             <span>运营管理</span>
                         </template>
-                        <el-menu-item index="2-1">内容管理</el-menu-item>
+                        <el-menu-item index="/sysManager/content">内容管理</el-menu-item>
                     </el-sub-menu>
                 </el-menu>
             </div>
