@@ -2,7 +2,7 @@
 import { useRouter } from 'vue-router'
 import md5 from 'md5'
 import { loginApi } from '@/apis/auth'
-import { useAuthStore } from '@/stores/auth.store'
+import { useAuthStore } from '@/stores/useAuthStore'
 
 
 

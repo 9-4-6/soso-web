@@ -1,6 +1,6 @@
 import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
-import { useAuthStore } from '@/stores/auth.store'
+import { useAuthStore } from '@/stores/useAuthStore'
 
 import router from '@/router'
 const authStore = useAuthStore()
